@@ -1,24 +1,92 @@
 ﻿// Yura1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 #include "Utilities.h"
-void createHero(string path) 
-{	
-	ifstream file(path, fstream::in);
-	string name = "";
-	int HP = 0;
-	int ATK = 0;
+#include "Hero.h"
 
-	file >> name >> HP >> ATK;
-	cout << "\n Name: " << name;
-	cout << "\n HP: " << HP;
-	cout << "\n ATK: " << ATK;
+
+Hero::Hero() {}
+
+Hero::Hero(std::string path){
+ifstream file(path, fstream::in);
+
+	file >> name >> hp >> atk >> arm;
+	Stats();
 	file.close();
+}
+
+void Hero::Kick(Hero* enemy) {
+	cout << name << " kick " << enemy->name << ": " << atk << "\n";
+	enemy->getDamage(atk);
+}
+void Hero::Stats() {
+	cout << "\n Name: " << name;
+	cout << "\n HP: " << hp;
+	cout << "\n ATK: " << atk;
+	cout << "\n ARM: " << arm  <<" ("<< (0.75* arm/1000) <<")" << endl;
+}
+
+void Hero::getDamage(int dmg) {
+	float armPct = 0.75 / 1000 * arm;
+
+	hp -= dmg - dmg*armPct;
+	if (hp <= 0) {
+		cout << name << " died.";
+	}
+}
+
+string Menu(string type) {
+
+	string cmd = "";
+	if (type == "main") {
+		system("cls");
+		cout << "\n\n\nВыбор персонажа\n";
+		cout << "1)Щербатая АмЭга\n";
+		cout << "2)Бончмэн\n";
+		cin >> cmd;
+		if (cmd == "1") {
+			selectedHero = player1;
+		}
+		else if (cmd == "2") {
+			selectedHero = player2;
+		}
+		return "action";
+	}
+	else
+		if (type == "action") {
+			cout << "\n\n\nВыбор действия\n";
+			cout << "1)Характеристики текущего персонажа\n";
+			cout << "2)Ударить другого персонажа\n";
+			cout << "х)В главное меню\n";
+			cin >> cmd;
+			if (cmd == "1") {
+				selectedHero->Stats();
+			}
+			else if (cmd == "2") {
+				auto enemy = selectedHero == player1 ? player2 : player1; //Тернарный оператор
+				selectedHero->Kick(enemy);
+			}
+			
+			if (cmd == "x") {
+				return "main";
+			}
+			else {
+				return "action";
+			}
+		}
 }
 
 int main()
 {
+
+	setlocale(LC_ALL, "Russian");
 	gameScore = 0;
-	createHero("player1.txt");
-	createHero("player2.txt");
+	player1 = new Hero("player1.txt");
+	player2 = new Hero("player2.txt");
+	string nextMenu = Menu("main");
+	while (nextMenu != "exit") {
+		nextMenu= Menu(nextMenu);
+	}
+	
+	system("pause");
 }
 
