@@ -1,10 +1,10 @@
 ﻿// Yura1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 #include "Utilities.h"
-void createHero(std::string path) 
-{
+void createHero(string path) 
+{	
 	ifstream file(path, fstream::in);
-	std::string name = "";
+	string name = "";
 	int HP = 0;
 	int ATK = 0;
 
@@ -13,14 +13,12 @@ void createHero(std::string path)
 	cout << "\n HP: " << HP;
 	cout << "\n ATK: " << ATK;
 	file.close();
-	}
+}
 
-int main() 
+int main()
 {
 	gameScore = 0;
-	char* player = new char("asv");
-	cout << "Введите имя файла игрока";
-	cin >> player;
-	createHero(player);
+	createHero("player1.txt");
+	createHero("player2.txt");
 }
 
