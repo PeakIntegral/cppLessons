@@ -2,4 +2,12 @@
 *.vs
 *.vcxproj*
 Debug/*
+*/Debug/*
 Release/*
+*.tlog
+*.idb
+*.pdb
+*.log
+*.obj
+*.ilk
+*.exe*
