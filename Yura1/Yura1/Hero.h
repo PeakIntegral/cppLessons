@@ -7,7 +7,7 @@ public:
 	string name = "";
 	int hp = 0;
 	int atk = 0;
-	int arm = 0;
+	int arm = 0;	// 1000 брони = сниж. урона на 75%
 	// конструкторы
 	Hero(); // конструктор по умолчанию
 	Hero(std::string path);

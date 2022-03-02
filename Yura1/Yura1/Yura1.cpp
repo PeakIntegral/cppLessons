@@ -9,7 +9,7 @@ Hero::Hero() {}
 Hero::Hero(std::string path){
 ifstream file(path, fstream::in);
 
-	file >> name >> hp >> atk;
+	file >> name >> hp >> atk >> arm;
 	Stats();
 	file.close();
 }
@@ -21,11 +21,14 @@ void Hero::Kick(Hero* enemy) {
 void Hero::Stats() {
 	cout << "\n Name: " << name;
 	cout << "\n HP: " << hp;
-	cout << "\n ATK: " << atk << endl;
+	cout << "\n ATK: " << atk;
+	cout << "\n ARM: " << arm  <<" ("<< (0.75* arm/1000) <<")" << endl;
 }
 
 void Hero::getDamage(int dmg) {
-	hp -= atk;
+	float armPct = 0.75 / 1000 * arm;
+
+	hp -= dmg - dmg*armPct;
 	if (hp <= 0) {
 		cout << name << " died.";
 	}
