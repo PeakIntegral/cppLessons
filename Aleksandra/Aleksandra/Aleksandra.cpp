@@ -7,6 +7,22 @@
 #include <string>
 using namespace std;
 
+class Hero {
+    // Поля = Переменная-член
+    string name;
+    int hp;
+    int attack;
+
+    // Методы = функция-член
+
+    bool isAlive() {
+        if (hp > 0) {
+            cout << "I am alive!" << endl;
+            return true;
+        }
+    }
+};
+
 void createHero(string path) {
  ifstream file(path, fstream::in);
     string name;
