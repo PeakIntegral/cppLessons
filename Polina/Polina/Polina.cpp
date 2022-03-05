@@ -2,11 +2,42 @@
 //
 
 #include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <string>
+using namespace std;
+
+// Создание функции
+// Тип ответа   Название(входные данные) {Действия}
+
+
+void createh(string pass) {
+    ifstream file(pass, fstream::in);
+    string name;
+    int hp;
+    int attack;
+    file >> name >> hp >> attack;
+    cout << "\n name:" << name;
+    cout << "\n hp:" << hp;
+    cout << "\n attack:" << attack;
+    file.close();
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    createh("player1.txt");
+    createh("player2.txt");
+
+    
+
+
+    
+
+
 }
+
+
+
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
