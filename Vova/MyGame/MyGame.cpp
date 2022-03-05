@@ -25,23 +25,23 @@ public:
         return false;
     }
 
-    void Kick(Hero enemy) {
-        enemy.hp -= 30;
+    void Kick(Hero* enemy) {
+        enemy->hp -= 30;
     }
 
 };
 
 
 
-Hero createHero(string path) {
+Hero* createHero(string path) {
     ifstream file(path, fstream::in);
 
-    Hero newPlayer;
+    Hero* newPlayer = new Hero();
 
-    file >> newPlayer.name >> newPlayer.hp >> newPlayer.attack;
-    cout << "\n Name: " << newPlayer.name;
-    cout << "\n HP: " << newPlayer.hp;
-    cout << "\n Attack: " << newPlayer.attack;
+    file >> newPlayer->name >> newPlayer->hp >> newPlayer->attack;
+    cout << "\n Name: " << newPlayer->name;
+    cout << "\n HP: " << newPlayer->hp;
+    cout << "\n Attack: " << newPlayer->attack;
     file.close();
     return newPlayer;
 }
@@ -49,53 +49,18 @@ Hero createHero(string path) {
 int main()
 {
 
- /*   Hero player1 = createHero("player1.txt");
-    Hero player2 = createHero("player2.txt");
+    Hero* player1 = createHero("player1.txt");
+    Hero* player2 = createHero("player2.txt");
 
-    player1.isAlive();
-    player2.isAlive();
+    player1->isAlive();
+    player2->isAlive();
 
-    player1.Kick(player2);
+    player1->Kick(player2);
+    player1->Kick(player2);
+    player1->Kick(player2);
 
-    player1.isAlive();
-    player2.isAlive();*/
-
-    // переменные копируют значения друг друга, но не знают, что дальше происходит с той ячейкой
-    int a = 10;
-    int b = a;
-    int c = a;
-    
-    b = 5;  // значение в b поменялось на 5, но в А и С осталось такое же
-
-    // создаются ячейки pa pb pc, которые просто указывают на ячейку "а"
-    // &a = 0x0f - адрес ячейки а
-    // pa = 0x0f - адрес ячейки а
-    //  pa = &a  - записать в pa адрес ячейки а
-    // *pa = узнать что внутри "а"  = получить значение в ячейке а
-   
-    int* pa = &a;
-    int* pb = &a;
-    int* pc = pa;
-
-
-    *pb = 7;    // взять ячейку "а" и записать в неё 7.  Соответственно в A, *pa, *pb, *pc станет 7, т.к. они все 
-                // ссылаются на одну и ту же ячейку
-
-
-    cout << endl << "a: " << a;
-    cout << endl << "b: " << b;
-    cout << endl << "c: " << c;
-
-    cout << endl << "pa: " << pa;
-    cout << endl << "pb: " << pb;
-    cout << endl << "pc: " << pc;
-
-    cout << endl << "*pa: " << *pa;
-    cout << endl << "*pb: " << *pb;
-    cout << endl << "*pc: " << *pc;
-
-
-
+    player1->isAlive();
+    player2->isAlive();
    
     system("pause");
 
